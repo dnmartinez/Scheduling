@@ -21,20 +21,10 @@ public class ShortestJobScheduler {
 		
 		fillArray(processes, scanner);
 		
-		boolean hasDuplicateIndex = true;
-		int duplicateIndex = 0;
-		while(hasDuplicateIndex) {
-			duplicateIndex = checkDuplicates(processes);
-			if(duplicateIndex == 0) {
-				hasDuplicateIndex = false;
-			} else {
-				changeProcessID(duplicateIndex, scanner, processes);
-			}
-		}
+		
 		
 		Sort sort = new Sort();
-		sort.arrivalTimeSort(processes);
-		System.out.println("By AT: " +Arrays.toString(processes));
+		//sort.arrivalTimeSort(processes);
 		sort.sjfSort(processes);
 		
 		//12 23 31 44
@@ -46,11 +36,12 @@ public class ShortestJobScheduler {
 	
 	public static void fillArray(Process processes[], Scanner scanner) {
 		for(int i = 0; i < processes.length; i++) {
-			System.out.print("Enter the PID, burst time, and arrival time: "); // Ingrese el ID del proceso, el tiempo de ejecucion y el tiempo de llegada
+			System.out.print("Enter the PID and burst time: "); // Ingrese el ID del proceso y el tiempo de ejecucion
 			int pid = scanner.nextInt();
 			int bt = scanner.nextInt();
-			int at = scanner.nextInt();
-			processes[i] = Process.createSJF(pid, bt, at);
+			//int at = scanner.nextInt();
+			//processes[i] = Process.createSJF(pid, bt, at);
+			processes[i] = Process.createSJF(pid, bt);
 		}
 	}
 	

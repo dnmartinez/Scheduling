@@ -24,20 +24,17 @@ public class Sort extends Process{
 	
 	public void sjfSort(Process myProcess[]) {
 		Process temp = new Process();
-		int at = 0;
-		int completionTime = myProcess[0].getBurstTime();
-		for(int i = 1; i < myProcess.length - 1; i++) {
-			if(completionTime > myProcess[i].getArrivalTime()) {
-				hasAccumulatedProcesses(myProcess, temp, completionTime, i);
-				
-			} else if(i == myProcess.length-1) {
-				if(completionTime > myProcess[i].getArrivalTime()) {
-			} else
-				noAccumulatedProcesses(myProcess, completionTime, i);
-				System.out.println("completion time else: " + completionTime);
-			}		
+		for(int i = 0; i < myProcess.length - 1; i++) {
+			if(myProcess[i].getBurstTime() > myProcess[i+1].getBurstTime()) {
+				temp = myProcess[i];
+				myProcess[i] = myProcess[i+1];
+				myProcess[i+1] = temp;
+			}
 		}
-		checkCorrectBT(myProcess);
+		
+			
+		
+		// CHECAR SI [0]BT Y [1]AT SON IGUALES Y ORDENAR LOS RESTANTES. Si no, ordenar igual
 		
 	}
 	
@@ -75,9 +72,8 @@ public class Sort extends Process{
 	}
 	public void checkCorrectBT(Process processes[]) {
 		System.out.println("here");
-		for(int i = 1; i < processes.length - 1; i++) {
-			if(processes[i].getBurstTime() > processes[i+1].getBurstTime() && 
-					processes[0].getBurstTime() != processes[i].getArrivalTime()) {
+		for(int i = 2; i < processes.length - 1; i++) {
+			if(processes[i].getBurstTime() > processes[i+1].getBurstTime() ) {
 				System.out.println("true");
 				sjfSort(processes);
 			}
